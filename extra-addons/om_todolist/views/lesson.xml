@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_todo_lesson_form" model="ir.ui.view">
+        <field name="name">todo.lesson.form</field>
+        <field name="model">todo.lesson</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="PROGRSSS" name="action_click_progress" type="object" />
+                    <field name="track_status" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="title" require="1" />
+                        <field name="tags" widget="many2many_tags" />
+                        <field name="start_date" />
+                        <field name="end_date" />
+                    </group>
+                    <notebook>
+                        <page string="List" name="todo_list_page">
+                            <field name="todo_list">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="description" />
+                                    <field name="is_complete" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Attendee" name="todo_attendee_page">
+                            <field name="users">
+                                <tree>
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_todo_lesson_tree" model="ir.ui.view">
+        <field name="name">todo.lesson.tree</field>
+        <field name="model">todo.lesson</field>
+        <field name="arch" type="xml">
+            <tree string="Lesson List"
+                decoration-info="track_status == 'in_progress'"
+                decoration-success="track_status == 'complete'">
+                <field name="title" />
+                <field name="tags" widget="many2many_tags" />
+                <field name="track_status" />
+                <field name="start_date" />
+                <field name="end_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_todo_lesson" model="ir.actions.act_window">
+        <field name="name">Lesson</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">todo.lesson</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_todo_lesson"
+        name="Todo list "
+        parent="menu_todo_root"
+        action="action_todo_lesson"
+        sequence="20" />
+
+    <record id="action_todo_lesson_uncomplete" model="ir.actions.act_window">
+        <field name="name">Lesson Uncomplete</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">todo.lesson</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('track_status','!=','complete')]</field>
+    </record>
+
+    <menuitem id="menu_todo_lesson_uncomplete"
+        name="Todo list uncomplete"
+        parent="menu_todo_root"
+        action="action_todo_lesson_uncomplete"
+        sequence="30" />
+
+    <record id="action_todo_lesson_complete" model="ir.actions.act_window">
+        <field name="name">Lesson Uncomplete</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">todo.lesson</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('track_status','=','complete')]</field>
+    </record>
+
+    <menuitem id="menu_todo_lesson_complete"
+        name="Todo list complete"
+        parent="menu_todo_root"
+        action="action_todo_lesson_complete"
+        sequence="40" />
+</odoo>

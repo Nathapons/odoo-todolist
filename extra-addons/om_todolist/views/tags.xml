@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_todo_tags_tree" model="ir.ui.view">
+        <field name="name">todo.tags.tree</field>
+        <field name="model">todo.tags</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_todo_tags" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">todo.tags</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_todo_tags"
+        name="Tags"
+        parent="menu_todo_root"
+        action="action_todo_tags"
+        sequence="50" />
+
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+om_todolist.accesss_todo_lesson,accesss_todo_lesson,om_todolist.model_todo_lesson,base.group_user,1,1,1,1,1
+om_todolist.accesss_todo_tags,accesss_todo_tags,om_todolist.model_todo_tags,base.group_user,1,1,1,1,1
+om_todolist.accesss_todo_list,access_todo_list,om_todolist.model_todo_list,base.group_user,1,1,1,1,1

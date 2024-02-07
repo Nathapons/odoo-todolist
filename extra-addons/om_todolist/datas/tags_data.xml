@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="main_tags_work" model="todo.tags">
+            <field name="name">Work</field>
+        </record>
+        <record id="main_tags_event" model="todo.tags">
+            <field name="name">Event</field>
+        </record>
+        <record id="main_tags_life" model="todo.tags">
+            <field name="name">Life archivement</field>
+        </record>
+    </data>
+</odoo>
