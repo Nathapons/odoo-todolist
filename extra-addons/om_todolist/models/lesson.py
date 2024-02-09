@@ -23,26 +23,25 @@ class TodoLesson(models.Model):
     users = fields.Many2many('res.users', string="Attendee")
     start_date = fields.Date(string="Start Date")
     end_date = fields.Date(string="End Date")
+    is_complete = fields.Boolean(string="Is Complete?")
 
     def action_click_progress(self):
         self.track_status = 'in_progress'
 
-    @api.model_create_multi
-    def create(self, record_list):
-        for record in record_list:
-            todo_records = []
-            for todo_rows in record['todo_list']:
-                data = todo_rows[-1]
-                if isinstance(data, dict):
-                    todo_records.append(data.get('is_complete'))
+    def action_click_done(self):
+        self.track_status = 'complete'
 
-            if todo_records and all(todo_records):
-                record['track_status'] = 'complete'
+    @api.constrains('start_date', 'end_date')
+    def _check_date(self):
+        if self.start_date > self.end_date:
+            raise ValidationError(_("Start date is less than end date"))
 
-        return super().create(record_list)
+    @api.onchange('todo_list')
+    def _onchange_todo_list(self):
+        data = [todo.is_complete for todo in self.todo_list]
+        self.is_complete = data and all(data)
 
     def write(self, record_list):
-        print(self.track_status)
         if self.track_status != 'complete':
             return super().write(record_list)
         else:

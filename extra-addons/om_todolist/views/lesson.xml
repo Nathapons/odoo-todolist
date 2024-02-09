@@ -5,25 +5,31 @@
         <field name="name">todo.lesson.form</field>
         <field name="model">todo.lesson</field>
         <field name="arch" type="xml">
-            <form>
+            <form name="Accounting Application Configuration">
                 <header>
-                    <button string="PROGRSSS" name="action_click_progress" type="object" />
+                    <button string="PROGRSSS" name="action_click_progress" type="object"
+                        attrs="{'invisible':[('track_status','!=', 'draft')]}" />
+                    <button string="DONE" name="action_click_done" type="object"
+                        attrs="{'invisible':[('is_complete','=',False)]}" />
                     <field name="track_status" widget="statusbar" />
                 </header>
                 <sheet>
                     <group>
-                        <field name="title" require="1" />
+                        <field name="title" required="1" />
                         <field name="tags" widget="many2many_tags" />
                         <field name="start_date" />
                         <field name="end_date" />
+                        <field name="is_complete" invisible="1" />
                     </group>
                     <notebook>
                         <page string="List" name="todo_list_page">
-                            <field name="todo_list">
-                                <tree>
+                            <field name="todo_list"
+                                attrs="{'readonly':[('track_status','=', 'complete')]}">
+                                <tree editable="bottom">
                                     <field name="name" />
                                     <field name="description" />
-                                    <field name="is_complete" />
+                                    <field name="is_complete"
+                                        attrs="{'invisible':[('parent.track_status','!=', 'in_progress')]}" />
                                 </tree>
                             </field>
                         </page>
@@ -48,10 +54,10 @@
                 decoration-info="track_status == 'in_progress'"
                 decoration-success="track_status == 'complete'">
                 <field name="title" />
-                <field name="tags" widget="many2many_tags" />
-                <field name="track_status" />
                 <field name="start_date" />
                 <field name="end_date" />
+                <field name="create_uid" string="User id" />
+                <field name="track_status" string="Tags" />
             </tree>
         </field>
     </record>
@@ -78,13 +84,13 @@
     </record>
 
     <menuitem id="menu_todo_lesson_uncomplete"
-        name="Todo list uncomplete"
+        name="Todo list Uncomplete"
         parent="menu_todo_root"
         action="action_todo_lesson_uncomplete"
         sequence="30" />
 
     <record id="action_todo_lesson_complete" model="ir.actions.act_window">
-        <field name="name">Lesson Uncomplete</field>
+        <field name="name">Lesson Complete</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">todo.lesson</field>
         <field name="view_mode">tree,form</field>
@@ -92,7 +98,7 @@
     </record>
 
     <menuitem id="menu_todo_lesson_complete"
-        name="Todo list complete"
+        name="Todo list Complete"
         parent="menu_todo_root"
         action="action_todo_lesson_complete"
         sequence="40" />

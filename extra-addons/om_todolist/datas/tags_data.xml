@@ -8,7 +8,7 @@
             <field name="name">Event</field>
         </record>
         <record id="main_tags_life" model="todo.tags">
-            <field name="name">Life archivement</field>
+            <field name="name">Life</field>
         </record>
     </data>
 </odoo>

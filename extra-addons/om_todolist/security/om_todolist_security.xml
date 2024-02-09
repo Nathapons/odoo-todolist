@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="om_todolist_lesson_rule" model="ir.rule">
+        <field name="name">Todo Lesson Rule</field>
+        <field name="model_id" ref="model_todo_lesson"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+    </record>
+</odoo>
