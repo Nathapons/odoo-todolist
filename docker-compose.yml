@@ -15,7 +15,7 @@ services:
     volumes:
       - odoo-data:/var/lib/odoo
       - ./extra-addons:/mnt/extra-addons
-    logging:
+    logging:                    # Add logging configuration here
       options:
         max-size: 10m
     command: $OPTIONS --dev=qweb,xml
@@ -26,7 +26,7 @@ services:
     image: postgres:15
     container_name: db
     ports:
-      - 5432:5432
+      - 5431:5432
     networks:
       - odoo-network
     environment:
@@ -35,7 +35,7 @@ services:
       - POSTGRES_PASSWORD=odoo
     volumes:
       - db-data:/var/lib/postgresql/data
-    logging:
+    logging:                    # Add logging configuration here
       options:
         max-size: 10m
 
@@ -43,5 +43,6 @@ volumes:
   odoo-data:
   odoo-addons:
   db-data:
+
 networks:
   odoo-network:
