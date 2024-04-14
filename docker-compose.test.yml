@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  test:
+    image: odoo:16.0
+    depends_on:
+      - test-db
+    ports:
+      - 8070:8069
+    networks:
+      - odoo-test-network
+    environment:
+      - COMPOSE_CONVERT_WINDOWS_PATHS=1 # for windows
+    volumes:
+      - odoo-test-data:/var/lib/odoo
+      - odoo-test-addons:/mnt/extra-addons
+    logging:                    # Add logging configuration here
+      options:
+        max-size: 10m
+    command: test $OPTIONS
+    stdin_open: true
+    tty: true
+
+  test-db:
+    image: postgres:15
+    ports:
+      - 5430:5432
+    networks:
+      - odoo-network
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - db-test-data:/var/lib/postgresql/data
+    logging:                    # Add logging configuration here
+      options:
+        max-size: 10m
+
+volumes:
+  odoo-test-data:  # Added missing volume declaration
+  odoo-test-addons:  # Added missing volume declaration
+  db-test-data:  # Added missing volume declaration
+
+networks:
+  odoo-network:
+  odoo-test-network:  # Define the missing network here
