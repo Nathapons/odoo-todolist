@@ -26,14 +26,15 @@ VS code Installation for linux
 
 
 ## Running Project via Docker
-Clone project from github reprository
+
+**Clone project from github reprository**
 
 ```bash
   git@github.com:Nathapons/odoo-todolist.git
   cd odoo-todolist
 ```
 
-Run docker 
+**Run docker**
 
 For Window
 ```bash
@@ -44,6 +45,8 @@ For linux
 ```bash
   sudo docker compose up -d
 ```
+
+
 
 
 **Remark:** Please open [localhost:8069](http://localhost:8069/) for view in Odoo ERP
