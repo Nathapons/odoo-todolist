@@ -15,7 +15,9 @@
 
 ## Installation
 
-VS code Installation
+[VS Code installation for Window](https://code.visualstudio.com/)
+
+VS code Installation for linux
 ```bash
   sudo snap install --classic code
 ```
@@ -23,6 +25,7 @@ VS code Installation
 [Docker installation](https://docs.docker.com/engine/install/ubuntu/#installation-methods)
 
 
+## Running Project via Docker
 Clone project from github reprository
 
 ```bash
@@ -30,9 +33,17 @@ Clone project from github reprository
   cd odoo-todolist
 ```
 
-Run docker
+Run docker 
+
+For Window
+```bash
+  docker compose up -d
+```
+
+For linux
 ```bash
   sudo docker compose up -d
 ```
+
 
 **Remark:** Please open [localhost:8069](http://localhost:8069/) for view in Odoo ERP
