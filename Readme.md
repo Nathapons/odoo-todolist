@@ -35,4 +35,4 @@ Run docker
   sudo docker compose up -d
 ```
 
-**Remark:** Please open localhost:8069 (Default port) for view in Odoo ERP
+**Remark:** Please open [localhost:8069](http://localhost:8069/) for view in Odoo ERP
